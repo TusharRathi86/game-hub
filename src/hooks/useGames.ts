@@ -1,3 +1,4 @@
+import { GameQuery } from "../App";
 import useData from "./useData";
 import { Genre } from "./useGenres";
 
@@ -15,19 +16,16 @@ export interface Game {
   metacritic: number;
 }
 
-const useGames = (
-  selectedGenre: Genre | null,
-  selectedPlatfrom: Platform | null
-) =>
+const useGames = (gameQuery: GameQuery) =>
   useData<Game>(
     "/games",
     {
       params: {
-        genres: selectedGenre?.id,
-        parent_platfroms: selectedPlatfrom?.id,
+        genres: gameQuery.genre?.id,
+        parent_platfroms: gameQuery.platfrom?.id,
       },
     },
-    [selectedGenre?.id, selectedPlatfrom?.id]
+    [gameQuery]
   );
 export default useGames;
 
@@ -38,6 +36,7 @@ import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
 import { CanceledError } from "axios";
 import useData from './useData';
+import { GameQuery } from '../App';
 
 export interface Platform {
   id: number;

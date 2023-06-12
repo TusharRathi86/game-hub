@@ -35,7 +35,7 @@ const PlatformIconList = ({ platforms }: Props) => {
     // Numeric value means that its a multiple of theme.space (which in chakra is 4 by default)
     <HStack marginY={1}>
       {" "}
-      {platforms.map((platform) => (
+      {platforms?.map((platform) => (
         <Icon key={platform.id} as={iconMap[platform.slug]} color="gray.500" />
       ))}
     </HStack>
